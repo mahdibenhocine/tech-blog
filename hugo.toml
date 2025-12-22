@@ -1,9 +1,9 @@
-baseURL = "https://yourdomain.com"
+baseURL = "https://cloudwithben.com"
 # [en, zh-cn, fr, ...] determines default content language
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
-title = "NAME_OF_YOUR_BLOG"
+title = "Cloud with Mahdi Ben"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
@@ -97,7 +97,7 @@ theme = "LoveIt"
   #  App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "NAME_OF_YOUR_BLOG"
+    title = "Cloud with Mahdi Ben"
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
@@ -142,7 +142,7 @@ theme = "LoveIt"
       # URL of the LOGO
       logo = ""
       # title name
-      name = "NAME_OF_YOUR_BLOG"
+      name = "Cloud with Mahdi Ben"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -196,9 +196,9 @@ theme = "LoveIt"
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
-      avatarURL = "https://avatars.githubusercontent.com/u/7815661?v=4"
+      avatarURL = "https://media.licdn.com/dms/image/v2/D4E03AQHQRV50PsWkQw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1723163904138?e=1767830400&v=beta&t=aTbd8YTsFOUFSq3M-xYm7ckXV4LOjyjW-EF8pSQSfoc"
       #  title shown in home page (HTML format is supported)
-      title = "NAME_OF_YOUR_BLOG"
+      title = "Cloud with Amir Mahdi Ben"
       # subtitle shown in home page
       subtitle = "My AWS DevOps Engineering Journey"
       # whether to use typeit animation for subtitle
@@ -220,7 +220,7 @@ theme = "LoveIt"
   [params.social]
     Bitbucket = ""
     GitHub = ""
-    Linkedin = "YOUR_LINKEDIN_LINK"
+    Linkedin = "mahdi-ben/"
     Twitter = ""
     Gitlab = ""
     Email = ""
@@ -511,7 +511,7 @@ theme = "LoveIt"
 
 # Author config
 [author]
-  name = "YOUR_NAME"
+  name = "Amir Mahdi Benhocine"
   email = ""
   link = ""
 
