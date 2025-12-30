@@ -1,34 +1,45 @@
-name: GitHub Pages
+name: Build & Deploy Hugo to AWS
 
 on:
   push:
     branches:
-      - main  # Set a branch to deploy
-  pull_request:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-22.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.119.0'
-          # extended: true
+          extended: true
 
       - name: Build
         run: hugo --minify
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          role-to-assume: ${{ secrets.AWS_DEV_ROLE_ARN }}
+          aws-region: eu-west-1
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync public/ s3://cloud-withben-blog-2026 --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.AWS_DEV_DISTR_ID }} \
+            --paths "/*"
