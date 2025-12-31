@@ -1,4 +1,4 @@
-name: Build & Deploy Hugo to AWS v2
+name: Build & Deploy Hugo to AWS v3
 
 on:
   push:
