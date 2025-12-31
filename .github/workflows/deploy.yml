@@ -1,4 +1,4 @@
-name: Build & Deploy Hugo 2 AWS
+name: Build & Deploy Hugo to AWS
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Configure AWS credentials (OIDC)
+      - name: Configuring of AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_DEV_ROLE_ARN }}
@@ -36,10 +36,14 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync public/ s3://cloud-withben-blog-2026 --delete
+          aws s3 sync . s3://cloud-withben-blog-2026 \
+                --exclude ".git/*" \
+                --exclude ".github/*" \
+                --delete
 
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.AWS_DEV_DISTR_ID }} \
             --paths "/*"
+
