@@ -29,3 +29,20 @@ ehthumbs.db
 # Other
 *.bak
 *.old
+
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Keep lock file
+!**/.terraform.lock.hcl
