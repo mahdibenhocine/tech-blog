@@ -10,8 +10,35 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  terraform:
+    name: Terraform Deploy
     runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: infra
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: infra
+        run: terraform apply -auto-approve
+
+  deploy:
+    name: Build & Deploy Hugo
+    needs: terraform          # ✅ REQUIRED
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +55,7 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Configuring of AWS credentials (OIDC)
+      - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_DEV_ROLE_ARN }}
@@ -36,14 +63,10 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3://cloud-withben-blog-2026 \
-                --exclude ".git/*" \
-                --exclude ".github/*" \
-                --delete
+          aws s3 sync public/ s3://cloud-withben-blog-2026 --delete
 
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.AWS_DEV_DISTR_ID }} \
             --paths "/*"
-
