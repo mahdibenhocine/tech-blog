@@ -196,7 +196,7 @@ theme = "LoveIt"
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
-      avatarURL = "https://media.licdn.com/dms/image/v2/D4E03AQHQRV50PsWkQw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1723163904138?e=1767830400&v=beta&t=aTbd8YTsFOUFSq3M-xYm7ckXV4LOjyjW-EF8pSQSfoc"
+      avatarURL = "https://avatars.githubusercontent.com/u/181903309?v=4"
       #  title shown in home page (HTML format is supported)
       title = "Cloud with Amir Mahdi Benhocine"
       # subtitle shown in home page

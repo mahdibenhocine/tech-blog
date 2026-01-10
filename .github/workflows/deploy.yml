@@ -23,7 +23,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}  
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}  
 
       - name: Terraform Init
         working-directory: infra
@@ -35,7 +35,7 @@ jobs:
 
   deploy:
     name: Build & Deploy Hugo
-    needs: terraform          # ✅ REQUIRED
+    needs: terraform        
     runs-on: ubuntu-22.04
 
     permissions:
